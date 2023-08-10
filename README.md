@@ -1,1 +1,1 @@
-# Suduku-Generater
+# Sudoku-Generater
