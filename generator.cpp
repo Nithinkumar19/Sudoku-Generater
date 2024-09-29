@@ -3,6 +3,7 @@
 #include <ctime>
 #include <cstdlib>
 #include <fstream>
+#include <random>
 #include <sstream>
 #include <string>
 #include <vector>
@@ -123,7 +124,7 @@ bool isSafe(int grid[9][9], int row, int col, int num)
 void Sudoku::fillEmptyDiagonalBox(int idx)
 {
   int start = idx*3;
-  random_shuffle(this->guessNum, (this->guessNum) + 9, genRandNum);
+  shuffle(this->guessNum, (this->guessNum) + 9, std::mt19937(std::random_device()()));
   for (int i = 0; i < 3; ++i)
   {
     for (int j = 0; j < 3; ++j)
@@ -176,7 +177,7 @@ Sudoku::Sudoku()
     this->gridPos[i] = i;
   }
 
-  random_shuffle(this->gridPos, (this->gridPos) + 81, genRandNum);
+  shuffle(this->gridPos, (this->gridPos) + 81, std::mt19937(std::random_device()()));
 
   // Randomly shuffling the guessing number array
   for(int i=0;i<9;i++)
@@ -184,7 +185,7 @@ Sudoku::Sudoku()
     this->guessNum[i]=i+1;
   }
 
-  random_shuffle(this->guessNum, (this->guessNum) + 9, genRandNum);
+  shuffle(this->guessNum, (this->guessNum) + 9, std::mt19937(std::random_device()()));
 
   // Initialising the grid
   for(int i=0;i<9;i++)
@@ -277,7 +278,7 @@ Sudoku::Sudoku(string grid_str, bool row_major)
     this->guessNum[i]=i+1;
   }
 
-  random_shuffle(this->guessNum, (this->guessNum) + 9, genRandNum);
+  shuffle(this->guessNum, (this->guessNum) + 9, std::mt19937(std::random_device()()));
 
   grid_status = true;
 }
